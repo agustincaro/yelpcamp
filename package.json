@@ -1,0 +1,18 @@
+{
+  "name": "yelpcamp",
+  "version": "1.0.0",
+  "description": "Yelp-like app for Campground reviewing. From Colt Steele's Web Bootcamp course",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.19"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
