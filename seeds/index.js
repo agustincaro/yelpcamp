@@ -20,8 +20,8 @@ db.once("open", () => {
 
 
 const sample = (array) => {
-    num = Math.floor(Math.random() * array.length)
-    return array[num];
+    index = Math.floor(Math.random() * array.length)
+    return array[index];
 }
 
 const seedDB = async () => {
