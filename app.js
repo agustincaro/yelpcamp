@@ -5,8 +5,14 @@ const dotenv = require('dotenv');
 dotenv.config();
 const mongoose = require('mongoose');
 const Campground = require('./models/campground')
-app.use(express.urlencoded({extended:true}));
+const methodOverride = require('method-override');
 
+
+
+//body parser
+app.use(express.urlencoded({extended:true}));
+//method overriding
+app.use(methodOverride('_method'));
 
 //db connection
 mongoose.connect('mongodb://localhost:27017/yelp-camp', {
@@ -56,6 +62,25 @@ app.get('/campgrounds/:id', async (req,res) => {
     res.render('campgrounds/show', {campground : campground})
 });
 
+//edit route
+app.get('/campgrounds/:id/edit', async(req,res) => {
+    const campground = await Campground.findById(req.params.id);
+    res.render('campgrounds/edit',  { campground});
+})
+
+app.put('/campgrounds/:id', async(req,res) => {
+    const {id} = req.params
+    const campground = await Campground.findByIdAndUpdate(id, {... req.body.campground}) //spreading whats in req.body
+    res.redirect(`/campgrounds/${campground._id}`)
+    
+})
+
+//delete route
+app.delete('/campgrounds/:id', async(req,res) => {
+    const {id} = req.params
+    await Campground.findByIdAndDelete(id);
+    res.redirect('/campgrounds');
+})
 
 //run express sv
 app.listen(process.env.PORT,() => {
