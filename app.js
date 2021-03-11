@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config();
+const ejsMate = require('ejs-mate')
 const mongoose = require('mongoose');
 const Campground = require('./models/campground')
 const methodOverride = require('method-override');
@@ -29,6 +30,7 @@ db.once("open", () => {
 });
 
 //view engine and path adding config
+app.engine('ejs',ejsMate);
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
